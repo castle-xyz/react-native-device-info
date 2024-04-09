@@ -528,44 +528,6 @@ RCT_EXPORT_METHOD(getTotalMemory:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
     resolve(@(self.getTotalMemory));
 }
 
-- (double) getTotalDiskCapacity {
-    uint64_t totalSpace = 0;
-    NSDictionary *storage = [self getStorageDictionary];
-
-    if (storage) {
-        NSNumber *fileSystemSizeInBytes = [storage objectForKey: NSFileSystemSize];
-        totalSpace = [fileSystemSizeInBytes unsignedLongLongValue];
-    }
-    return (double) totalSpace;
-}
-
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getTotalDiskCapacitySync) {
-    return @(self.getTotalDiskCapacity);
-}
-
-RCT_EXPORT_METHOD(getTotalDiskCapacity:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    resolve(@(self.getTotalDiskCapacity));
-}
-
-- (double) getFreeDiskStorage {
-    uint64_t freeSpace = 0;
-    NSDictionary *storage = [self getStorageDictionary];
-
-    if (storage) {
-        NSNumber *freeFileSystemSizeInBytes = [storage objectForKey: NSFileSystemFreeSize];
-        freeSpace = [freeFileSystemSizeInBytes unsignedLongLongValue];
-    }
-    return (double) freeSpace;
-}
-
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getFreeDiskStorageSync) {
-    return @(self.getFreeDiskStorage);
-}
-
-RCT_EXPORT_METHOD(getFreeDiskStorage:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    resolve(@(self.getFreeDiskStorage));
-}
-
 - (NSString *) getDeviceTypeName {
     return [DeviceTypeValues objectAtIndex: [self getDeviceType]];
 }
